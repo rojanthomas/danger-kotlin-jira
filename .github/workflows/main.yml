@@ -1,16 +1,22 @@
-name: Danger Pre-Build Checks
+name: Danger
 
-on: [pull_request]
+on: [ pull_request ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: "Run Danger"
+    name: "Run Danger against PR"
+    container: docker://ghcr.io/danger/danger-kotlin:1.0.0-beta.2
+
     steps:
-      - uses: actions/checkout@v1
-      - name: Danger
-        uses: docker://ghcr.io/danger/danger-kotlin:1.0.0-beta
-        with:
-          args: "--dangerfile=danger/PreBuildChecks.df.kts"
+      - uses: actions/checkout@v2
+
+      - name: Build & Install Plugin on Danger
+        run:
+          ./gradlew build installDangerPlugin
+
+      - name: Run danger/kotlin against PR
+        run:
+          danger-kotlin ci --failOnErrors --dangerfile=danger/Dangerfile.df.kts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
