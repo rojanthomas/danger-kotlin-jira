@@ -40,6 +40,7 @@ fabric.properties
 
 # Package Files #
 *.jar
+!libs/danger-plugin-installer-0.1-alpha.jar
 !gradle/wrapper/gradle-wrapper.jar
 
 *.war
