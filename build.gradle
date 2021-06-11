@@ -1,10 +1,26 @@
+buildscript {
+    repositories {
+        mavenLocal()
+    }
+
+    dependencies {
+        classpath "systems.danger:danger-plugin-installer:0.1-alpha"
+    }
+}
+
 plugins {
     id 'java'
     id 'org.jetbrains.kotlin.jvm' version '1.4.32'
 }
 
+apply plugin: 'danger-kotlin-plugin-installer'
+
 group 'com.rojanthomas'
 version '0.1.0'
+
+dangerPlugin {
+    outputJar = "${buildDir}/libs/my-awesome-plugin-0.0.1.jar"
+}
 
 repositories {
     mavenCentral()
