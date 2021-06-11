@@ -6,6 +6,7 @@ import io.mockk.junit5.MockKExtension
 import io.mockk.verify
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import systems.danger.kotlin.sdk.DangerContext
@@ -26,6 +27,7 @@ internal class JiraPluginTest {
         clearAllMocks()
     }
 
+    @Disabled
     @Test
     fun test() {
         JiraPlugin.check(
