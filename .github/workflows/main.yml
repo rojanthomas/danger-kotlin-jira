@@ -1,0 +1,16 @@
+name: Danger Pre-Build Checks
+
+on: [pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: "Run Danger"
+    steps:
+      - uses: actions/checkout@v1
+      - name: Danger
+        uses: docker://ghcr.io/danger/danger-kotlin:1.0.0-beta
+        with:
+          args: "--dangerfile=danger/PreBuildChecks.df.kts"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
