@@ -2,26 +2,27 @@ package com.rojanthomas.dangerkotlinjira
 
 internal class JiraIssueCollector {
 
-    private val jiraIssueRegexFactory = JiraIssueRegexFactory()
-
     fun collect(
-        projectKeys: Set<String>,
-        sources: Set<String>,
-    ): MutableSet<String> {
-        val projectKeyRegexes = projectKeys.map { jiraIssueRegexFactory.create(projectKey = it) }
+        projectKeys: List<String>,
+        source: String,
+    ): List<String> {
+        if (projectKeys.isEmpty() || source.isEmpty()) return emptyList()
 
-        val jiraIssues = mutableSetOf<String>()
+        println("Project keys: $projectKeys")
+        println("Source: $source")
 
-        sources.forEach { source ->
-            projectKeyRegexes.forEach { projectKeyRegex ->
-                val matchResults = projectKeyRegex.findAll(source)
-
-                matchResults.forEach {
-                    jiraIssues.add(it.value)
-                }
+        return projectKeys.createJoinedRegex()
+            .findAll(source)
+            .map { matchResult ->
+                println(matchResult.groupValues)
+                matchResult.groupValues
             }
-        }
+            .toList()
+            .flatten()
+            .distinct()
+    }
 
-        return jiraIssues
+    private fun List<String>.createJoinedRegex(): Regex {
+        return Regex(joinToString(separator = "|") { "$it-\\d+" })
     }
 }
