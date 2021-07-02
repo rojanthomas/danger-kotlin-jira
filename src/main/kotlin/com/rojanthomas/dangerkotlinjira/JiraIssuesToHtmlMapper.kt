@@ -1,15 +1,26 @@
 package com.rojanthomas.dangerkotlinjira
 
-internal class JiraIssuesToHtmlMapper {
-
-    private val jiraIssueCollector = JiraIssueCollector()
+internal class JiraIssuesToHtmlMapper(private val jiraIssueCollector: JiraIssueCollector) {
 
     fun map(
         jiraUrl: String,
-        projectKeys: Set<String>,
-        sources: Set<String>,
+        projectKeys: List<String>,
+        sources: List<String>,
     ): String {
-        return jiraIssueCollector.collect(projectKeys = projectKeys, sources = sources)
-            .joinToString(HtmlUtil.lineBreak) { HtmlUtil.getHyperlinkTextHtml(text = it, url = jiraUrl + it) }
+        val jiraIssues = jiraIssueCollector.collect(projectKeys = projectKeys, source = sources.joinToString())
+
+        return StringBuilder().append(HtmlUtil.getHeading("JIRA issues"))
+            .append(
+                HtmlUtil.getUnorderedList(
+                    jiraIssues.takeIf { it.isNotEmpty() }
+                        ?.joinToString(separator = "") { jiraIssue ->
+                            HtmlUtil.getListElement(
+                                HtmlUtil.getHyperlinkTextHtml(text = jiraIssue, url = jiraUrl + jiraIssue)
+                            )
+                        }
+                        ?: HtmlUtil.getListElement("None")
+                )
+            )
+            .toString()
     }
 }

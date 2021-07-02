@@ -8,9 +8,9 @@ register plugin JiraPlugin
 
 danger(args) {
     JiraPlugin.check(
-        "https://rojanthomas.atlassian.net/browse",
-        setOf("ROJ"),
-        setOf(
+        "https://rojanthomas.atlassian.net/browse/",
+        listOf("ROJ", "THO"),
+        listOf(
             this.github.pullRequest.title,
             this.github.pullRequest.body,
         )

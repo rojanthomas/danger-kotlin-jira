@@ -32,8 +32,8 @@ internal class JiraPluginTest {
     fun test() {
         JiraPlugin.check(
             "https://comparethemarket.atlassian.net/browse/",
-            projectKeys = setOf("MA", "TA"),
-            sources = setOf(
+            projectKeys = listOf("MA", "TA"),
+            sources = listOf(
                 "hello",
                 "this is a jira issue MA-4458",
                 "this is a jira issue TA-4451, TA-4450"
