@@ -1,8 +1,9 @@
 buildscript {
     repositories {
-        mavenLocal()
+        flatDir {
+            dirs 'libs'
+        }
     }
-
     dependencies {
         classpath "systems.danger:danger-plugin-installer:0.1-alpha"
     }
@@ -19,7 +20,7 @@ group 'com.rojanthomas'
 version '0.1.0'
 
 dangerPlugin {
-    outputJar = "${buildDir}/libs/my-awesome-plugin-0.0.1.jar"
+    outputJar = "${buildDir}/libs/danger-kotlin-jira-0.1.0.jar"
 }
 
 repositories {
