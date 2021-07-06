@@ -1,12 +1,13 @@
-name: Publish to GitHub Packages
+name: Publish
 
 on:
   release:
-    types: [created]
+    types: [published]
 
 jobs:
   publish:
     runs-on: ubuntu-latest
+    name: Publish to GitHub Packages
     permissions:
       contents: read
       packages: write
