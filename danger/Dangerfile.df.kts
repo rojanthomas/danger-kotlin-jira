@@ -1,4 +1,4 @@
-@file:DependsOn("danger-kotlin-jira-0.1.0.jar")
+@file:DependsOn("io.github.rojanthomas:danger-kotlin-jira:0.1.1")
 
 import com.rojanthomas.dangerkotlinjira.JiraPlugin
 import systems.danger.kotlin.danger
