@@ -50,6 +50,35 @@ compileTestKotlin {
 }
 
 publishing {
+    // https://docs.gradle.org/current/userguide/publishing_maven.html
+    publications {
+        mavenJava(MavenPublication) {
+            pom {
+                name = 'Danger Kotlin Jira Plugin'
+                description = 'A JIRA plugin for Danger Kotlin'
+                url = 'https://github.com/rojanthomas/danger-kotlin-jira'
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://github.com/rojanthomas/danger-kotlin-jira/blob/master/LICENSE'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'rojanthomas'
+                        name = 'Rojan Thomas'
+                        email = 'rojanthomas@gmail.com'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/rojanthomas/danger-kotlin-jira.git'
+                    developerConnection = 'scm:git:ssh://github.com/rojanthomas/danger-kotlin-jira.git'
+                    url = 'https://github.com/rojanthomas/danger-kotlin-jira'
+                }
+            }
+        }
+    }
+
     repositories {
         maven {
             name = "GitHubPackages"
