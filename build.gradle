@@ -12,13 +12,14 @@ buildscript {
 plugins {
     id 'java'
     id 'org.jetbrains.kotlin.jvm' version '1.4.32'
+    id 'org.jetbrains.dokka' version '1.4.32'
     id 'maven-publish'
 }
 
 apply plugin: 'danger-kotlin-plugin-installer'
 
 group 'com.rojanthomas'
-version '0.1.4'
+version '0.1.0'
 
 dangerPlugin {
     outputJar = "${buildDir}/libs/danger-kotlin-jira-0.1.0.jar"
@@ -49,10 +50,32 @@ compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
 
+task sourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    // For pure Kotlin libraries, in case you have them
+    from sourceSets.main.java.srcDirs
+    from sourceSets.main.kotlin.srcDirs
+}
+
+task javadocJar(type: Jar, dependsOn: dokkaJavadoc) {
+    archiveClassifier.set('javadoc')
+    from dokkaJavadoc.outputDirectory
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
 publishing {
     // https://docs.gradle.org/current/userguide/publishing_maven.html
     publications {
         mavenJava(MavenPublication) {
+
+            artifact("$buildDir/libs/${project.getName()}-${version}.jar")
+            artifact sourcesJar
+            artifact javadocJar
+
             pom {
                 name = 'Danger Kotlin Jira Plugin'
                 description = 'A JIRA plugin for Danger Kotlin'
