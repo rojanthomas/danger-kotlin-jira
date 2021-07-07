@@ -1,4 +1,4 @@
-@file:DependsOn("com.rojanthomas:danger-kotlin-jira:0.1.0")
+@file:DependsOn(artifactsCoordinates = ["io.github.rojanthomas:danger-kotlin-jira:0.1.0"])
 
 import com.rojanthomas.dangerkotlinjira.JiraPlugin
 import systems.danger.kotlin.danger

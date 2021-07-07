@@ -27,6 +27,7 @@ dangerPlugin {
 
 repositories {
     mavenCentral()
+    google()
 }
 
 dependencies {
