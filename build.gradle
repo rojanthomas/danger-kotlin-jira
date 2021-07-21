@@ -23,7 +23,7 @@ apply plugin: 'signing'
 
 group 'com.rojanthomas'
 archivesBaseName = "danger-kotlin-jira"
-version '0.1.0'
+version '0.1.1'
 
 dangerPlugin {
     outputJar = "$buildDir/libs/${project.getName()}-${version}.jar"
