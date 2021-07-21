@@ -11,8 +11,13 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Run Unit Tests
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONATYPE_USERNAME: '${{ secrets.SONATYPE_USERNAME }}'
+          SONATYPE_PASSWORD: '${{ secrets.SONATYPE_PASSWORD }}'
+          ORG_GRADLE_PROJECT_signingKeyId: '${{ secrets.GPG_SIGNING_KEY_ID }}'
+          ORG_GRADLE_PROJECT_signingKey: '${{ secrets.GPG_SIGNING_KEY }}'
+          ORG_GRADLE_PROJECT_signingPassword: '${{ secrets.GPG_SIGNING_KEY_PASSPHRASE }}'
         run:
           ./gradlew test
 
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
