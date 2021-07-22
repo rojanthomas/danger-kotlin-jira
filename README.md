@@ -8,7 +8,7 @@
 
 This plugin will collect JIRA issues mentioned in a PR (e.g. ROJ-1234) and display them as a hyperlinked Danger message.
 
-!(/images/danger_message.png)
+![Screenshot](./images/danger_message.png)
 
 ## Getting started
 
